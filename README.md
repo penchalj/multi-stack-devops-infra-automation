@@ -39,10 +39,11 @@ ansible-playbook -i inventory/hosts.yml playbooks/deploy.yml -K -vv \
 
 
 ## Voter Page
+<img width="596" height="241" alt="image" src="https://github.com/user-attachments/assets/6abc2011-8533-4864-881d-576143cb16f9" />
 
 ## 
-
 ##  Result Page
+<img width="602" height="347" alt="image" src="https://github.com/user-attachments/assets/794e73b0-0aba-4765-a735-8fc908d3f6ca" />
 
 
 ## Learnings
