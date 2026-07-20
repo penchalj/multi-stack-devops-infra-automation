@@ -30,7 +30,18 @@ ansible-playbook -i inventory/hosts.yml playbooks/deploy.yml -K -vv \
 
 
 ## Screenshots
-[Add images of working Vote/Result pages, Ansible output, etc.]
+## Repo Structure
+<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
+
+## Voter Page
+<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
+
+
+## 
+
+##  Result Page
+<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
+
 
 ## Learnings
 - Networking (public/private subnets, Bastion)
