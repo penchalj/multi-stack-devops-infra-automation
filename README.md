@@ -31,16 +31,18 @@ ansible-playbook -i inventory/hosts.yml playbooks/deploy.yml -K -vv \
 
 ## Screenshots
 ## Repo Structure
-<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
+## Terraform
+<img width="1023" height="825" alt="image" src="https://github.com/user-attachments/assets/2ea57076-43cf-4344-9b2b-0db70a7540aa" />
+
+## Ansible
+<img width="958" height="810" alt="image" src="https://github.com/user-attachments/assets/14760f50-c2ec-4c1b-918c-3c8eba56144e" />
+
 
 ## Voter Page
-<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
-
 
 ## 
 
 ##  Result Page
-<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
 
 
 ## Learnings
