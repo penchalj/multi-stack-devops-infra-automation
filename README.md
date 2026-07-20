@@ -3,11 +3,11 @@ Devops Project: aws-terraform-ansible-docker-voting-microservices
 End-to-End Multi-Stack DevOps Project: AWS + Terraform + Ansible + Docker Microservices Voting App (Python, Node.js, .NET, Redis, Postgres)
 
 # Multi-Stack DevOps Voting Application
-<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
 
 End-to-End IaC project demonstrating Terraform, Ansible, Docker on AWS.
 
 ## Architecture
+<img width="1165" height="788" alt="image" src="https://github.com/user-attachments/assets/bcdb0935-d26b-48cf-afd3-559310eb4940" />
 
 
 ## Tech Stack
