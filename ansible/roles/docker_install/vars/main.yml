@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for ansible/roles/docker_install
+dockerhub_username: "penchaljdevops"
+redis_host: "10.0.10.86"
+postgres_host: "10.0.10.159"
+postgres_user: "postgres"
+postgres_password: "postgres"
+postgres_db: "postgres"
+

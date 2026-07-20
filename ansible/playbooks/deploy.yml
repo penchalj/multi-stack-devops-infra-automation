@@ -1,0 +1,101 @@
+---
+- name: Configure Frontend Instance (Vote + Result)
+  hosts: frontend
+  become: yes
+  roles:
+    - docker_install
+  tasks:
+    - name: Pull Vote image
+      community.docker.docker_image:
+        name: "{{ dockerhub_username }}/vote-app:v1.0"
+        source: pull
+
+    - name: Pull Result image
+      community.docker.docker_image:
+        name: "{{ dockerhub_username }}/result-app:v1.0"
+        source: pull
+
+    - name: Run Vote container
+      community.docker.docker_container:
+        name: vote
+        image: "{{ dockerhub_username }}/vote-app:v1.0"
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:80"          # Access via http://FRONTEND_PUBLIC_IP:8080
+        env:
+          REDIS_HOST: "{{ redis_host }}"
+
+    - name: Run Result container
+      community.docker.docker_container:
+        name: result
+        image: "{{ dockerhub_username }}/result-app:v1.0"
+        state: started
+        restart_policy: always
+        ports:
+          - "8081:80"          # Access via http://FRONTEND_PUBLIC_IP:8081
+        env:
+          # Add the correct Postgres env var your result app expects
+          POSTGRES_HOST: "{{ postgres_host }}"
+          POSTGRES_USER: "{{ postgres_user }}"
+          POSTGRES_PASSWORD: "{{ postgres_password }}"
+          POSTGRES_DB: "{{ postgres_db }}"
+
+- name: Configure Backend Instance (Redis + Worker)
+  hosts: backend
+  become: yes
+  roles:
+    - docker_install
+  tasks:
+    - name: Pull Worker image
+      community.docker.docker_image:
+        name: "{{ dockerhub_username }}/worker-app:v1.0"
+        source: pull
+
+    - name: Run Redis container
+      community.docker.docker_container:
+        name: redis
+        image: redis:alpine
+        state: started
+        restart_policy: always
+        ports:
+          - "6379:6379"
+
+    - name: Run Worker container
+      community.docker.docker_container:
+        name: worker
+        image: "{{ dockerhub_username }}/worker-app:v1.0"
+        state: started
+        restart_policy: always
+        env:
+          REDIS_HOST: "{{ redis_host }}"
+          POSTGRES_HOST: "{{ postgres_host }}"
+          POSTGRES_USER: "{{ postgres_user }}"
+          POSTGRES_PASSWORD: "{{ postgres_password }}"
+          POSTGRES_DB: "{{ postgres_db }}"
+
+- name: Configure DB Instance (PostgreSQL with Persistent Volume)
+  hosts: db
+  become: yes
+  roles:
+    - docker_install
+  tasks:
+    - name: Create persistent volume for Postgres
+      community.docker.docker_volume:
+        name: db-data
+        state: present
+
+    - name: Run PostgreSQL container
+      community.docker.docker_container:
+        name: db
+        image: postgres:15-alpine
+        state: started
+        restart_policy: always
+        ports:
+          - "5432:5432"
+        volumes:
+          - db-data:/var/lib/postgresql/data
+        env:
+          POSTGRES_USER: "{{ postgres_user }}"
+          POSTGRES_PASSWORD: "{{ postgres_password }}"
+          POSTGRES_DB: "{{ postgres_db }}"

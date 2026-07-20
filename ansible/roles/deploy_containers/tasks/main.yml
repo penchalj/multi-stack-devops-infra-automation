@@ -1,0 +1,36 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for ansible/roles/deploy_containers
+- name: Run Result container
+  community.docker.docker_container:
+    name: result
+    image: "{{ dockerhub_username }}/result-app:v1.0"
+    state: started
+    restart_policy: always
+    ports:
+      - "8081:80"
+    env:
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_DB: "{{ postgres_db }}"
+    extra_hosts:
+      "db": "{{ postgres_host }}"
+    pull: yes
+
+- name: Run Worker container
+  community.docker.docker_container:
+    name: worker
+    image: "{{ dockerhub_username }}/worker-app:v1.0"
+    state: started
+    restart_policy: always
+    env:
+      REDIS_HOST: "{{ redis_host }}"
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_DB: "{{ postgres_db }}"
+    extra_hosts:
+      "db": "{{ postgres_host }}"
+      "redis": "{{ redis_host }}"
+    pull: yes

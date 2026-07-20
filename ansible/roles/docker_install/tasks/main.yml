@@ -1,0 +1,35 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for ansible/roles/docker_install
+
+- name: Update apt cache (Ubuntu)
+  ansible.builtin.apt:
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install Docker (Ubuntu)
+  ansible.builtin.package:
+    name: docker.io
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Docker (Amazon Linux)
+  ansible.builtin.yum:
+    name: docker
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Start and enable Docker
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user | default('ubuntu') }}"
+    groups: docker
+    append: yes
+
+- name: Reset ssh connection to pick up docker group
+  ansible.builtin.meta: reset_connection
