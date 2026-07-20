@@ -22,8 +22,12 @@ End-to-End IaC project demonstrating Terraform, Ansible, Docker on AWS.
 - Task 3: Ansible deployment (Vote, Result, Worker, Redis, Postgres)
 
 ## How to Run
-1. terraform init && terraform apply
-2. cd ansible && ansible-playbook ...
+1. terraform init,terraform plan && terraform apply
+2. To run Ansible playbook:
+3. cd ansible
+ansible-playbook -i inventory/hosts.yml playbooks/deploy.yml -K -vv \
+  -e "dockerhub_username=penchaljdevops redis_host=10.0.10.86 postgres_host=10.0.10.159 postgres_user=postgres postgres_password=postgres postgres_db=postgres"
+
 
 ## Screenshots
 [Add images of working Vote/Result pages, Ansible output, etc.]
