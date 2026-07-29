@@ -260,7 +260,7 @@ This project is designed for a **15-minute portfolio presentation** covering:
 
 ## 📄 License
 
-This project is for educational and portfolio purposes.  
+This project is for portfolio purposes.  
 Original application inspired by the [Docker Sample Voting App](https://github.com/dockersamples/example-voting-app).
 
 ---
