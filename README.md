@@ -235,7 +235,7 @@ This project is designed for a **15-minute portfolio presentation** covering:
 
 ---
 
-## 🧠 What I Learned
+## 🧠 What I Build
 
 - Designing multi-tier VPC architectures (public/private subnets, NAT, route tables)
 - Writing production-grade Terraform modules and remote state
